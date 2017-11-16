@@ -2,9 +2,12 @@
 Docker container with build tools already installed, intended to reduce CI build times.
 
 # Build
-`docker build -t dzil:latest - < Dockerfile`
-or
-`docker build -t dzil:5.26 - < Dockerfile`
+```
+docker build -t dzil:latest - < Dockerfile
+### or
+docker build -t dzil:5.26 - < Dockerfile
+```
+
 etc
 
 # Branches and tags
