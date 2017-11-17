@@ -68,6 +68,7 @@ RUN chown -R root:root /root/.perl-cpm
 ```
 
 Where do different build tools leave their files?
+
 Tool | Location
 --- | ---
 cpan | /root/.cpan
