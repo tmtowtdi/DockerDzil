@@ -37,6 +37,7 @@ this:
 REPOROOT
   |- README.md
   |- .circleci/
+      |- config.yml
   |
   |- Whatever other stuff you keep in your repo that's not Dist::Zilla-related
   |
