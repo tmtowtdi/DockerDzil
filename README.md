@@ -28,8 +28,46 @@ All of these live in `bin/`.
     - Connects you to 'tmtowtdi/dzil:latest' in a bash shell
     - Remember to `set -o vi` first thing after you connect to save on the 
       expletives.
-    
-# Problems with CircleCI
+
+# Using with CircleCI
+eg You have a git repo with a Dist::Zilla-controlled subdirectory that you 
+want CircleCI to autobuild for you.
+
+Assume your repo looks like this:
+```
+REPOROOT
+  |- README.md
+  |- .circleci/
+  |
+  |- Whatever other stuff you keep in your repo that's not Dist::Zilla-related
+  |
+  |- dz/
+      |- dist.ini
+      |- bin/
+      |- lib/
+      |- t/
+```
+
+`REPOROOT/.circleci/config`:
+```
+ version: 2
+ jobs:
+   build:
+     docker:
+       - image: tmtowtdi/dzil:latest
+     steps:
+       - checkout
+       - run:
+           name: Install with dzil
+           pwd: dz
+           command: dzil install
+
+```
+
+# Problem with CircleCI
+This problem has been fixed with the current Dockerfile, these are just notes 
+so I can avoid making the same mistake next time.
+
 Installing Perl modules via cpan or cpanm or cpm can cause a problem with UIDs 
 that are too high for Docker to be able to map them.  This problem is not 
 apparent when you build the image locally, but it does show up when CircleCI 
