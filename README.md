@@ -14,10 +14,6 @@ All of these live in `bin/`.
           of `docker images` but doesn't remove the image itself, since 
           'dzil:latest' and 'tmtowtdi/dzil:latest' are just different tags 
           pointing at the same image.
-    - If you want to produce a differently-tagged image, eg 
-      "tmtowtdi/dzil:5.24a" to indicate perl v5.24.1:
-        - Edit build.bash, Dockerfile, and push.bash
-        - In all, `s/latest/5.24.1/g`.
 - push.bash
     - Pushes 'tmtowtdi/dzil:latest' up to Dockerhub, then deletes the image 
       from the local store.
@@ -28,6 +24,11 @@ All of these live in `bin/`.
     - Connects you to 'tmtowtdi/dzil:latest' in a bash shell
     - Remember to `set -o vi` first thing after you connect to save on the 
       expletives.
+
+# Tags
+If you want to make a new image, tagged to a specific Perl version, make sure 
+that [the official perl docker image](https://hub.docker.com/_/perl/) supports 
+the tag.
 
 # Using with CircleCI
 Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
