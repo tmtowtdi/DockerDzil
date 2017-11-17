@@ -30,10 +30,9 @@ All of these live in `bin/`.
       expletives.
 
 # Using with CircleCI
-eg You have a git repo with a Dist::Zilla-controlled subdirectory that you 
-want CircleCI to autobuild for you.
-
-Assume your repo looks like this:
+Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
+you want CircleCI to autobuild for you, and your repo looks something like 
+this:
 ```
 REPOROOT
   |- README.md
