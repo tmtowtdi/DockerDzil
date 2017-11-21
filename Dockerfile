@@ -9,4 +9,3 @@ RUN cpan install App::cpanminus \
     && rm -rf /root/.cpan \
     && rm -rf /root/.cpanm \
     && rm -rf /root/.perl-cpm
-
