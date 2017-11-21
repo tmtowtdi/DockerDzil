@@ -27,8 +27,7 @@ All of these live in `bin/`.
 
 # Tags
 If you want to make a new image, tagged to a specific Perl version, make sure 
-that [the official perl docker image](https://hub.docker.com/_/perl/) supports 
-the tag.
+that the official perl docker image supports the tag.
 
 # Using with CircleCI
 Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
