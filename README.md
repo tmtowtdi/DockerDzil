@@ -23,9 +23,9 @@ on Docker Hub.  Changes to that perl project should trigger a new build on
 this project.
 
 ## Build time
-Takes around 18 minutes, which is way longer than it takes locally.  The "log" 
-section at the bottom of the build details page on Docker Hub never shows me 
-anything at all, but the builds *do* work.
+The automated builds on Docker Hub take around 18 minutes, which is way longer 
+than they take locally.  The "log" section at the bottom of the build details 
+page on Docker Hub never shows me anything at all, but the builds *do* work.
 
 # Tools
 These are not required for initiating a build on Docker Hub.  They're just 
@@ -57,7 +57,8 @@ REPOROOT
       |- t/
 ```
 
-`REPOROOT/.circleci/config`:
+Your Circle CI config file at `REPOROOT/.circleci/config` will look something 
+like:
 ```
  version: 2
  jobs:
@@ -75,6 +76,9 @@ REPOROOT
 
 ...So the gain here is that you don't have to waste Circle CI build minutes in 
 building cpanm and Dist::Zilla with each build.
+
+I don't see any reason this image couldn't be used for other CI tools.  Circle 
+CI is just the only one I've tested it with.
 
 # Problem with CircleCI
 This problem has been fixed with the current Dockerfile, these are just notes 
