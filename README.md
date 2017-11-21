@@ -24,17 +24,17 @@ this project.
 
 ## Build time
 Takes around 18 minutes, which is way longer than it takes locally.  The "log" 
-section at the bottom of the build details page never shows me anything at 
-all, but the build does appear to work.
+section at the bottom of the build details page on Docker Hub never shows me 
+anything at all, but the builds *do* work.
 
 # Tools
 These are not required for initiating a build on Docker Hub.  They're just 
 handy for working locally.
 
 - `bin/build.bash`
-    - Builds 'tmtowtdi/distzilla:latest' from ./Dockerfile
+    - Builds `tmtowtdi/distzilla:latest` from ./Dockerfile
 - `bin/connect.bash`
-    - Connects you to 'tmtowtdi/distzilla:latest' in a bash shell
+    - Connects you to `tmtowtdi/distzilla:latest` in a bash shell
     - Remember to `set -o vi` first thing after you connect to save on the 
       expletives.
 
@@ -73,14 +73,17 @@ REPOROOT
 
 ```
 
+...So the gain here is that you don't have to waste Circle CI build minutes in 
+building cpanm and Dist::Zilla with each build.
+
 # Problem with CircleCI
 This problem has been fixed with the current Dockerfile, these are just notes 
 so I can avoid making the same mistake next time.
 
 Installing Perl modules via cpan or cpanm or cpm can cause a problem with UIDs 
 that are too high for Docker to be able to map them.  This problem is not 
-apparent when you build the image locally, but it does show up when CircleCI 
-pulls the image.  The error I get from them is:
+apparent when you build the image locally; it only shows up when CircleCI 
+builds the image.  The error I get from them is:
 
 ```
 CircleCI was unable to start the container because of a userns remapping failure in Docker.
@@ -92,23 +95,19 @@ Checkout our docs https://circleci.com/docs/2.0/high-uid-error/ to learn how to 
 Original error: failed to register layer: Error processing tar file(exit status 1): Container ID 831580115 cannot be mapped to a host ID
 ```
 
-Long story short, what you need to do in that case is to, in your Dockerfile, 
-install your module and then remove the offending build files all in the same 
-command, eg:
+Files created by `cpan`, `cpanm`, and `cpm` can get assigned these high UIDs 
+that confuse Docker.  Those files need to be removed or, at least, ownership 
+on them needs to be changed to a lower UID (eg `root`):
 ```
+### eelete
 RUN cpm install -g Dist::Zilla && rm -rf /root/.perl-cpm
-```
-
-Alternately, you could recursively change ownership on those directories 
-instead of deleting them:
-```
+### or change ownership
 RUN cpm install -g Dist::Zilla && chown -R root:root /root/.perl-cpm
 ```
 
 Whether you change ownership on those build directories or just delete them 
-entirely, it must be done in a single RUN command; this will not work, because 
-the first RUN command will complete with those mis-owned files in existence, 
-and that's what causes the CircleCI error.
+entirely, *it must be done in the same RUN command that created those files*.  
+This will not work:
 ```
 RUN cpm install -g Dist::Zilla
 RUN chown -R root:root /root/.perl-cpm
