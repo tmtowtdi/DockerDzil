@@ -18,7 +18,9 @@ Git Branch Name | Docker Image Tag
 master | latest
 v5.26 | 5.26
 v5.24 | 5.24
-v5.10.1 | 5.10.1
+v5.14.4 | 5.14.4
+
+Dist::Zilla requires 5.14 or later, so no use going any lower than that.
 
 The Docker Hub project has also been linked to the official perl image project 
 on Docker Hub.  Changes to that perl project should trigger a new build on 
