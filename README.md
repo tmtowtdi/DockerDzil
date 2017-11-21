@@ -14,7 +14,7 @@ Hub will trigger a new build.
 Right now, Dockerhub is watching for changes to these branches/tags:
 
 Git Branch Name | Docker Image Tag
-=== | ===
+--- | ---
 master | latest
 v5.26 | 5.26
 
