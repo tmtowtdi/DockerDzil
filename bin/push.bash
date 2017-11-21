@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker push tmtowtdi/dzil:latest
-docker rmi -f tmtowtdi/dzil:latest
+docker push tmtowtdi/distzilla:latest
+docker rmi -f tmtowtdi/distzilla:latest

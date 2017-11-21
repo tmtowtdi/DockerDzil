@@ -3,31 +3,39 @@
 Docker container with build tools already installed, intended to reduce CI 
 build times.
 
+# Automated Build
+Takes around 18 minutes, which is way longer than it takes locally.  The "log" 
+section at the bottom of the build details page never shows me anything at 
+all, but the build does appear to work.
+
 # Tools
 All of these live in `bin/`.
 
 - build.bash
-    - Builds 'dzil:latest' from ./Dockerfile
-    - Re-tags the produced image as 'tmtowtdi/dzil:latest'
-    - Removes the original 'dzil:latest'
+    - Builds 'distzilla:latest' from ./Dockerfile
+    - Re-tags the produced image as 'tmtowtdi/distzilla:latest'
+    - Removes the original 'distzilla:latest'
         - This actually just removes the tag.  That removes it from the output 
           of `docker images` but doesn't remove the image itself, since 
-          'dzil:latest' and 'tmtowtdi/dzil:latest' are just different tags 
-          pointing at the same image.
+          'distzilla:latest' and 'tmtowtdi/distzilla:latest' are just 
+          different tags pointing at the same image.
 - push.bash
-    - Pushes 'tmtowtdi/dzil:latest' up to Dockerhub, then deletes the image 
-      from the local store.
+    - Pushes 'tmtowtdi/distzilla:latest' up to Dockerhub, then deletes the 
+      image from the local store.
     - The local deletion is just to clean up when you're doing a bunch of 
       builds because you're currently working on the project.  You can comment 
       out that local deletion from the script if you want.
 - connect.bash
-    - Connects you to 'tmtowtdi/dzil:latest' in a bash shell
+    - Connects you to 'tmtowtdi/distzilla:latest' in a bash shell
     - Remember to `set -o vi` first thing after you connect to save on the 
       expletives.
 
 # Tags
 If you want to make a new image, tagged to a specific Perl version, make sure 
-that the official perl docker image supports the tag.
+that [the official perl docker image](https://hub.docker.com/_/perl/) 
+supports_ the tag.  Then create a branch (eg "v5.26"), and edit that branch's 
+bash scripts and Dockerfile.  `s/latest/5.26/g` in all of those files.  Then 
+build and push.
 
 # Using with CircleCI
 Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
@@ -54,7 +62,7 @@ REPOROOT
  jobs:
    build:
      docker:
-       - image: tmtowtdi/dzil:latest
+       - image: tmtowtdi/distzilla:latest
      steps:
        - checkout
        - run:

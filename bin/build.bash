@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t dzil:latest - < Dockerfile
-docker tag dzil:latest tmtowtdi/dzil:latest
-docker rmi -f dzil:latest
+docker build -t distzilla:latest - < Dockerfile
+docker tag distzilla:latest tmtowtdi/distzilla:latest
+docker rmi -f distzilla:latest
