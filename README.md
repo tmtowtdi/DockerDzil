@@ -12,19 +12,7 @@ all, but the build does appear to work.
 All of these live in `bin/`.
 
 - build.bash
-    - Builds 'distzilla:latest' from ./Dockerfile
-    - Re-tags the produced image as 'tmtowtdi/distzilla:latest'
-    - Removes the original 'distzilla:latest'
-        - This actually just removes the tag.  That removes it from the output 
-          of `docker images` but doesn't remove the image itself, since 
-          'distzilla:latest' and 'tmtowtdi/distzilla:latest' are just 
-          different tags pointing at the same image.
-- push.bash
-    - Pushes 'tmtowtdi/distzilla:latest' up to Dockerhub, then deletes the 
-      image from the local store.
-    - The local deletion is just to clean up when you're doing a bunch of 
-      builds because you're currently working on the project.  You can comment 
-      out that local deletion from the script if you want.
+    - Builds 'tmtowtdi/distzilla:latest' from ./Dockerfile
 - connect.bash
     - Connects you to 'tmtowtdi/distzilla:latest' in a bash shell
     - Remember to `set -o vi` first thing after you connect to save on the 
