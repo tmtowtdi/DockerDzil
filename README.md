@@ -17,6 +17,7 @@ Git Branch Name | Docker Image Tag
 --- | ---
 master | latest
 v5.26 | 5.26
+v5.24 | 5.24
 
 The Docker Hub project has also been linked to the official perl image project 
 on Docker Hub.  Changes to that perl project should trigger a new build on 
