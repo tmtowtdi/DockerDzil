@@ -22,21 +22,23 @@ The Docker Hub project has also been linked to the official perl image project
 on Docker Hub.  Changes to that perl project should trigger a new build on 
 this project.
 
+To set up a new automated build:
+
+- Create a new branch indicating the perl version.  Please name it with a 
+  leading 'v' for consistency (eg `v5.24`)
+- Check out your new branch.  Edit `Dockerfile` to pull the appropriate perl 
+  image tag, eg `FROM perl:5.24`
+- Visit [this project's Docker Hub 
+  page](https://hub.docker.com/r/tmtowtdi/distzilla/), `Build Settings` tab.
+    - Add a new row to the list of watched branches (the little green '+' 
+      symbol next to the master branch row adds a new row).  Fill out your new 
+      row as needed.
+    - Click the 'Save Changes' button you nincompoop.
+
 ## Build time
 The automated builds on Docker Hub take around 18 minutes, which is way longer 
 than they take locally.  The "log" section at the bottom of the build details 
 page on Docker Hub never shows me anything at all, but the builds *do* work.
-
-# Tools
-These are not required for initiating a build on Docker Hub.  They're just 
-handy for working locally.
-
-- `bin/build.bash`
-    - Builds `tmtowtdi/distzilla:latest` from ./Dockerfile
-- `bin/connect.bash`
-    - Connects you to `tmtowtdi/distzilla:latest` in a bash shell
-    - Remember to `set -o vi` first thing after you connect to save on the 
-      expletives.
 
 # Using with CircleCI
 Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
