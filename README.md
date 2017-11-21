@@ -1,29 +1,42 @@
 
-# DockerDzil
+# tmtowtdi/distzilla
 Docker container with build tools already installed, intended to reduce CI 
 build times.
 
 # Automated Build
+
+## Tracked Branches
+[This project](https://hub.docker.com/r/tmtowtdi/distzilla/builds/) on Docker 
+Hub watches for pushes to this git repo, and automatically builds new Docker 
+images.  Any push to a branch specified on the Build Settings tab on Docker 
+Hub will trigger a new build.
+
+Right now, Dockerhub is watching for changes to these branches/tags:
+
+Git Branch Name | Docker Image Tag
+=== | ===
+master | latest
+v5.26 | 5.26
+
+The Docker Hub project has also been linked to the official perl image project 
+on Docker Hub.  Changes to that perl project should trigger a new build on 
+this project.
+
+## Build time
 Takes around 18 minutes, which is way longer than it takes locally.  The "log" 
 section at the bottom of the build details page never shows me anything at 
 all, but the build does appear to work.
 
 # Tools
-All of these live in `bin/`.
+These are not required for initiating a build on Docker Hub.  They're just 
+handy for working locally.
 
-- build.bash
+- `bin/build.bash`
     - Builds 'tmtowtdi/distzilla:latest' from ./Dockerfile
-- connect.bash
+- `bin/connect.bash`
     - Connects you to 'tmtowtdi/distzilla:latest' in a bash shell
     - Remember to `set -o vi` first thing after you connect to save on the 
       expletives.
-
-# Tags
-If you want to make a new image, tagged to a specific Perl version, make sure 
-that [the official perl docker image](https://hub.docker.com/_/perl/) 
-supports_ the tag.  Then create a branch (eg "v5.26"), and edit that branch's 
-bash scripts and Dockerfile.  `s/latest/5.26/g` in all of those files.  Then 
-build and push.
 
 # Using with CircleCI
 Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
