@@ -13,22 +13,22 @@ other site:
 
 # Automated Build
 
-## Tracked Branches
-The project on Docker Hub watches for pushes to this git repo, and 
-automatically builds new Docker images.  Any push to a branch specified on the 
-Build Settings tab on Docker Hub will trigger a new build.
+## Tracked Tags
+Docker Hub watches for updates to specific git tags, and automatically builds 
+new Docker images.
 
-Right now, Dockerhub is watching for changes to these branches/tags:
+Right now, Dockerhub is watching for changes to these tags:
 
-Git Branch Name | Docker Image Tag
+Git Tag Name | Docker Image Tag
 --- | ---
-master | latest
+latest | latest
 v5.26 | 5.26
 v5.24 | 5.24
 v5.22.4 | 5.22.4
 v5.14.4 | 5.14.4
 
-Dist::Zilla requires 5.14 or later, so no use going any lower than that.
+`Dist::Zilla` requires perl 5.14 or later, so no use going any lower than 
+that.
 
 The Docker Hub project has also been linked to the official perl image project 
 on Docker Hub.  Changes to that perl project should trigger a new build on 
@@ -36,21 +36,24 @@ this project.
 
 To set up a new automated build:
 
-- Create a new branch indicating the perl version.  Please name it with a 
-  leading 'v' for consistency (eg `v5.24`)
-- Check out your new branch.  Edit `Dockerfile` to pull the appropriate perl 
-  image tag, eg `FROM perl:5.24`
-- Visit [this project's Docker Hub 
-  page](https://hub.docker.com/r/tmtowtdi/distzilla/), `Build Settings` tab.
-    - Add a new row to the list of watched branches (the little green '+' 
-      symbol next to the master branch row adds a new row).  Fill out your new 
-      row as needed.
-    - Click the 'Save Changes' button you nincompoop.
+- Create a new Dockerfile
+    - Just copy from `Dockerfile.latest`.  Edit your new file and 
+      `s/latest/<perl image version number to pull from>/`
+- Update Docker Hub to start looking for your new tag
+    - On the Docker Hub project, Build Settings tab, add a new entry following 
+      existing examples.
+        - The green `+` next to the first row adds a new row.
+        - Click the 'Save Changes' button you nincompoop.
+- Create a new git tag and push the tag to github
+    - `git tag -a v9.99 -m 'initial 9.99 tag'` - Obviously, update the version 
+      number.
+    - `git push origin --tags`
 
 ## Build time
-The automated builds on Docker Hub take around 18 minutes, which is way longer 
-than they take locally.  The "log" section at the bottom of the build details 
-page on Docker Hub never shows me anything at all, but the builds *do* work.
+The automated builds on Docker Hub take way longer than they take locally.  If 
+you've only got one build queued up, it can take around 20 minutes.  The "log" 
+section at the bottom of the build details page on Docker Hub never shows me 
+anything at all, but the builds *do* work.
 
 # Using with CircleCI
 Assuming you have a git repo with a Dist::Zilla-controlled subdirectory that 
