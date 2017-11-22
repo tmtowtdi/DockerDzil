@@ -36,6 +36,8 @@ this project.
 
 
 ## Update existing perl version/tag
+This is only necessary if you want to update a specific Dockerfile and trigger 
+a new automated build on Docker Hub.
 
 - Delete the tag both locally and on github
     - delete local tag - `git tag -d v9.99`
