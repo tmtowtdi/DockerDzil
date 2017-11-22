@@ -34,7 +34,19 @@ The Docker Hub project has also been linked to the official perl image project
 on Docker Hub.  Changes to that perl project should trigger a new build on 
 this project.
 
-To set up a new automated build:
+
+## Update existing perl version/tag
+
+- Delete the tag both locally and on github
+    - delete local tag - `git tag -d v9.99`
+    - delete tag on github - `git push --delete origin v9.99`
+- Make your changes, commit them to master, re-tag
+    - `git add -A . && git commit -m 'commit msg'` -- derp.
+    - git tag -a v9.99 -m "updating version 9.99"
+- Remember to push your new tag
+    - `git push origin --tags`
+
+## Create new automated build for a new perl version
 
 - Create a new Dockerfile
     - Just copy from `Dockerfile.latest`.  Edit your new file and 
