@@ -42,7 +42,7 @@ this project.
     - delete tag on github - `git push --delete origin v9.99`
 - Make your changes, commit them to master, re-tag
     - `git add -A . && git commit -m 'commit msg'` -- derp.
-    - git tag -a v9.99 -m "updating version 9.99"
+    - `git tag -a v9.99 -m "updating version 9.99"`
 - Remember to push your new tag
     - `git push origin --tags`
 
