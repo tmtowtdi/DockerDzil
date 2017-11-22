@@ -3,13 +3,20 @@
 Docker container with build tools already installed, intended to reduce CI 
 build times.
 
+# Projects
+The document you're reading right now gets used as the README on both Github 
+and Docker Hub.  So whichever of those sites you're at, here's the link to the 
+other site:
+
+- [Github](https://github.com/tmtowtdi/DockerDzil)
+- [Docker Hub](https://hub.docker.com/r/tmtowtdi/distzilla/)
+
 # Automated Build
 
 ## Tracked Branches
-[This project](https://hub.docker.com/r/tmtowtdi/distzilla/builds/) on Docker 
-Hub watches for pushes to this git repo, and automatically builds new Docker 
-images.  Any push to a branch specified on the Build Settings tab on Docker 
-Hub will trigger a new build.
+The project on Docker Hub watches for pushes to this git repo, and 
+automatically builds new Docker images.  Any push to a branch specified on the 
+Build Settings tab on Docker Hub will trigger a new build.
 
 Right now, Dockerhub is watching for changes to these branches/tags:
 
