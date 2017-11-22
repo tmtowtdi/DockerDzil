@@ -25,6 +25,7 @@ Git Branch Name | Docker Image Tag
 master | latest
 v5.26 | 5.26
 v5.24 | 5.24
+v5.22.4 | 5.22.4
 v5.14.4 | 5.14.4
 
 Dist::Zilla requires 5.14 or later, so no use going any lower than that.

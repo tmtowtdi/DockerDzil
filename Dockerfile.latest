@@ -1,5 +1,7 @@
 FROM perl:latest
+
 RUN apt-get update && apt-get install -y build-essential
+
 RUN cpan install App::cpanminus \
     && cpanm install App::cpm \
     && cpm install -g Test2::V0 \
